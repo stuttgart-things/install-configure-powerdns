@@ -1,0 +1,20 @@
+---
+- name: Include podman pod profile
+  include_vars:
+    file: vars/powerdns-server.yaml
+
+- name: Start podman deployment as root
+  become: yes
+  block:
+  - name: Deploy ldap server
+    include_role:
+      name: deploy-podman-pod
+    vars:
+      permanent: true
+
+# - name: "Wait for {{ ldap_server_uri }} is ready - check every 5 seconds"
+#   shell: "curl --insecure -i {{ ldap_kind }}://{{ ldap_server_uri }}"
+#   retries: 60
+#   register: ldap_status
+#   until: ldap_status.stdout.find("DN:") != -1
+#   delay: 5

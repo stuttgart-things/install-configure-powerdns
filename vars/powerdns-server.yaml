@@ -1,0 +1,27 @@
+---
+ports: 
+  ldaps:
+    host: 636
+    container: 636
+  webinterface_https:
+    host: 443
+    container: 443
+
+containers:
+  powerdns-mariadb:
+    image: mariadb:10.5
+    environment:
+      - MYSQL_ROOT_PASSWORD={{ powerdns_mariadb_rootpw }}
+      - MYSQL_DATABASE={{ powerdns_mariadb_db }}
+      - MYSQL_USER={{ powerdns_mariadb_user }}
+      - MYSQL_PASSWORD={{ powerdns_mariadb_pw }}
+    volumes:
+      - "/podman/pv/powerdns/mariadb:/var/lib/mysql:z"
+
+  powerdns-server:
+    image: osixia/phpldapadmin:0.9.0
+    environment:
+      - MYSQL_HOST=localhost
+      - MYSQL_USER={{ powerdns_mariadb_user }}
+      - MYSQL_PASS={{ powerdns_mariadb_pw }}
+      - MYSQL_DB={{ powerdns_mariadb_db }}
