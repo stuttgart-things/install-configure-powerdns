@@ -4,6 +4,7 @@ powerdns_mariadb_rootpw: "password123"
 powerdns_mariadb_user: pdns
 powerdns_mariadb_pw: "password123"
 powerdns_mariadb_db: pdns
+powerdns_frontend_secret_key: "a-very-secret-key"
 
 # General vars
 powerdns_install: false
