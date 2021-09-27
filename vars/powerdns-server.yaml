@@ -1,11 +1,17 @@
 ---
 ports: 
+  pdns_udp:
+    host: 53
+    container: 53
+    protocol: udp
   pdns_tcp:
     host: 53
     container: 53
+    protocol: tcp
   frontend_https:
     host: 80
     container: 80
+    protocol: tcp
 
 containers:
   powerdns-mariadb:
