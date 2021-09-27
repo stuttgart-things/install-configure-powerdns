@@ -6,7 +6,7 @@
 - name: Start podman deployment as root
   become: yes
   block:
-  - name: Deploy ldap server
+  - name: Deploy pdns server stack
     include_role:
       name: deploy-podman-pod
     vars:
