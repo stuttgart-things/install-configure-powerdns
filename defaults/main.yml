@@ -9,6 +9,7 @@ powerdns_frontend_secret_key: "a-very-secret-key"
 #POWERDNS configuration
 powerdns_conf_api_key: "password123"
 powerdns_conf_loglevel: 3
+powerdns_dnssec: no
 
 # General vars
 powerdns_install: false
