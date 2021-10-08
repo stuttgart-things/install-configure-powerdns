@@ -8,10 +8,6 @@ ports:
     host: 53
     container: 53
     protocol: tcp
-  pdns_mariadb:
-    host: 3306
-    container: 3306
-    protocol: tcp
   frontend_https:
     host: 80
     container: 80
