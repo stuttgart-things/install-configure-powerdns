@@ -44,3 +44,7 @@ containers:
       - SECRET_KEY='{{ powerdns_frontend_secret_key }}'
     volumes:
       - "/podman/pv/powerdns/frontend/:/data:z"
+
+generate_config: true
+config_template: pdns.conf.j2
+config_mount_target: /podman/pv/powerdns/backend/pdns.conf
