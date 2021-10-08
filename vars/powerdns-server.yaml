@@ -33,7 +33,6 @@ containers:
       - MYSQL_USER={{ powerdns_mariadb_user }}
       - MYSQL_PASS={{ powerdns_mariadb_pw }}
       - MYSQL_DB={{ powerdns_mariadb_db }}
-      - MYSQL_PORT={{ powerdns_mariadb_port }}
       - MYSQL_DNSSEC={{ powerdns_dnssec }}
     volumes:
       - "/podman/pv/powerdns/backend/pdns.conf:/etc/pdns/pdns.conf"
