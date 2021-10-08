@@ -24,7 +24,7 @@ containers:
       - MYSQL_USER={{ powerdns_mariadb_user }}
       - MYSQL_PASSWORD={{ powerdns_mariadb_pw }}
     volumes:
-      - "/podman/pv/powerdns/mariadb:/var/lib/mysql:z"
+      - "/podman/pv/powerdns/mariadb/:/var/lib/mysql:z"
 
   powerdns-backend:
     image: psitrax/powerdns:v4.4.1
@@ -39,4 +39,4 @@ containers:
     environment:
       - SECRET_KEY='{{ powerdns_frontend_secret_key }}'
     volumes:
-      - "/podman/pv/powerdns/frontend:/data:z"
+      - "/podman/pv/powerdns/frontend/:/data:z"
