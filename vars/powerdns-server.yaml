@@ -35,7 +35,7 @@ containers:
       - MYSQL_DB={{ powerdns_mariadb_db }}
       - MYSQL_DNSSEC={{ powerdns_dnssec }}
     volumes:
-      - "/podman/pv/powerdns/backend/pdns.conf:/etc/pdns/pdns.conf"
+      - "/podman/pv/powerdns/backend/pdns.conf:/etc/pdns/pdns.conf:z"
 
   powerdns-frontend:
     image: ngoduykhanh/powerdns-admin:latest
