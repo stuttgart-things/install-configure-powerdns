@@ -28,12 +28,6 @@ containers:
 
   powerdns-backend:
     image: psitrax/powerdns:v4.4.1
-    environment:
-      - MYSQL_HOST=127.0.0.1
-      - MYSQL_USER={{ powerdns_mariadb_user }}
-      - MYSQL_PASS={{ powerdns_mariadb_pw }}
-      - MYSQL_DB={{ powerdns_mariadb_db }}
-      - MYSQL_DNSSEC={{ powerdns_dnssec }}
     volumes:
       - "/podman/pv/powerdns/backend/pdns.conf:/etc/pdns/pdns.conf"
 
