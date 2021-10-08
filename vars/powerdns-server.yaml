@@ -13,6 +13,8 @@ ports:
     container: 80
     protocol: tcp
 
+pod_name: pdns
+
 containers:
   powerdns-mariadb:
     image: mariadb:10.5
