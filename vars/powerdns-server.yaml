@@ -8,6 +8,10 @@ ports:
     host: 53
     container: 53
     protocol: tcp
+  pdns_mariadb:
+    host: 3306
+    container: 3306
+    protocol: tcp
   frontend_https:
     host: 80
     container: 80
@@ -29,7 +33,7 @@ containers:
   powerdns-backend:
     image: psitrax/powerdns:v4.4.1
     environment:
-      - MYSQL_HOST=localhost:3306
+      - MYSQL_HOST=localhost
       - MYSQL_USER={{ powerdns_mariadb_user }}
       - MYSQL_PASS={{ powerdns_mariadb_pw }}
       - MYSQL_DB={{ powerdns_mariadb_db }}
