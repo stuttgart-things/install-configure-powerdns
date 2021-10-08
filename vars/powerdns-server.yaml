@@ -34,8 +34,8 @@ containers:
       - MYSQL_PASS={{ powerdns_mariadb_pw }}
       - MYSQL_DB={{ powerdns_mariadb_db }}
       - MYSQL_DNSSEC={{ powerdns_dnssec }}
-    volumes:
-      - "/podman/pv/powerdns/backend/pdns.conf:/etc/pdns/pdns.conf"
+    # volumes:
+    #   - "/podman/pv/powerdns/backend/pdns.conf:/etc/pdns/pdns.conf"
 
   powerdns-frontend:
     image: ngoduykhanh/powerdns-admin:latest
@@ -44,6 +44,6 @@ containers:
     volumes:
       - "/podman/pv/powerdns/frontend/:/data:z"
 
-generate_config: true
-config_template: pdns.conf.j2
-config_mount_target: /podman/pv/powerdns/backend/pdns.conf
+# generate_config: true
+# config_template: pdns.conf.j2
+# config_mount_target: /podman/pv/powerdns/backend/pdns.conf
