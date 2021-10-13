@@ -28,6 +28,8 @@ containers:
 
   powerdns-backend:
     image: psitrax/powerdns:v4.4.1
+    environment:
+      - MYSQL_AUTOCONF=false
     volumes:
       - "/podman/pv/powerdns/backend/pdns.conf:/etc/pdns/pdns.conf"
 
