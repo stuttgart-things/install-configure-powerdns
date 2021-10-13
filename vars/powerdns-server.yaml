@@ -36,6 +36,7 @@ containers:
       - MYSQL_AUTOCONF=false
     volumes:
       - "/podman/pv/powerdns/backend/pdns.conf:/etc/pdns/pdns.conf"
+      - "/podman/pv/powerdns/backend/entrypoint.sh:/entrypoint.sh"
 
   powerdns-frontend:
     image: ngoduykhanh/powerdns-admin:latest
