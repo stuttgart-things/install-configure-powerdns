@@ -8,6 +8,10 @@ ports:
     host: 53
     container: 53
     protocol: tcp
+  pdns_tcp:
+    host: 8081
+    container: 8081
+    protocol: tcp
   frontend_https:
     host: 80
     container: 80
