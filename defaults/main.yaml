@@ -16,7 +16,7 @@ powerdns_conf_gmysql_port: 3306
 powerdns_conf_webserver: yes
 powerdns_conf_webserver_address: 0.0.0.0
 powerdns_conf_webserver_password: "password123"
-powerdns_conf_webserver_allow_from: 10.0.0.0/8
+powerdns_conf_webserver_allow_from: 10.0.0.0/8,127.0.0.1
 powerdns_conf_version_string: anonymous
 powerdns_conf_default_ttl: 1500
 
