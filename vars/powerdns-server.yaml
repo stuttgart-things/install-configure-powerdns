@@ -31,7 +31,7 @@ containers:
       - "/podman/pv/powerdns/mariadb/:/var/lib/mysql:z"
 
   powerdns-backend:
-    image: pdns-mysql:4.4-alpine
+    image: pschiffe/pdns-mysql:4.4-alpine
     environment:
       - PDNS_gmysql_host=mysql
       - PDNS_gmysql_port=3306
