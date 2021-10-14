@@ -33,6 +33,7 @@ containers:
   powerdns-backend:
     image: pschiffe/pdns-mysql:4.4-alpine
     environment:
+      - PDNS_local-ipv6-nonexist-fail=yes
       - PDNS_gmysql_host=127.0.0.1
       - PDNS_gmysql_port=3306
       - PDNS_gmysql_dbname={{ powerdns_mariadb_db }}
