@@ -7,9 +7,18 @@ powerdns_mariadb_db: pdns
 powerdns_frontend_secret_key: "a-very-secret-key"
 
 #POWERDNS configuration
+powerdns_conf_master: yes
+powerdns_conf_api: yes
 powerdns_conf_api_key: "password123"
-powerdns_conf_loglevel: 3
-powerdns_cnf_web_password: "password123"
+powerdns_conf_local_address: 0.0.0.0
+powerdns_conf_gmysql_host: 127.0.0.1
+powerdns_conf_gmysql_port: 3306
+powerdns_conf_webserver: yes
+powerdns_conf_webserver_address: 0.0.0.0
+powerdns_conf_webserver_password: "password123"
+powerdns_conf_webserver_allow_from: 10.0.0.0/8
+powerdns_conf_version_string: anonymous
+powerdns_conf_default_ttl: 1500
 
 # General vars
 powerdns_install: false
