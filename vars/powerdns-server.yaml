@@ -4,10 +4,10 @@ ports:
     host: 53
     container: 53
     protocol: udp
-  pdns_tcp:
-    host: 53
-    container: 53
-    protocol: tcp
+  # pdns_tcp:
+  #   host: 53
+  #   container: 53
+  #   protocol: tcp
   pdns_tcp:
     host: 8081
     container: 8081
