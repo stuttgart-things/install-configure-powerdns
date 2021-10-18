@@ -1,0 +1,17 @@
+---
+- name: Get Server ID
+  ansible.builtin.uri:
+    return_content: yes
+    validate_certs: false
+    url: "{{ pdns_url }}/api/v1/servers"
+    method: GET
+    status_code: 200
+    body_format: json
+    headers:
+      X-API-Key: "{{ pdns_pwd }}"
+  register: pdns_server_info
+  delegate_to: "{{ pdns_api_executor }}"
+
+- name: Save requested pdns server id
+  ansible.builtin.set_fact:
+    pdns_server_id: "{{ pdns_api_executor.json.id }}"
