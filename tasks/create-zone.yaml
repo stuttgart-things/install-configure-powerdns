@@ -1,6 +1,4 @@
 ---
-
-
 - name: "Create DNS zone"
   ansible.builtin.uri:
     return_content: yes
