@@ -1,0 +1,23 @@
+---
+- name: Create dns record (RRSet)
+  ansible.builtin.uri:
+    validate_certs: false
+    url: "{{ pdns_url }}/api/v1/servers/{{ pdns_server_id }}/zones/{{ pdns_zone_id }}"
+    method: PATCH
+    status_code: 204
+    body_format: json
+    body:
+      id: "{{ pdns_zone_id }}"
+      name: "{{ pdns_zone_name }}"
+      rrsets:
+        comments: Created with ansible
+        changetype: replace
+        name: "{{ item.fqdn }}"
+        records:
+          content: "{{ item.ip }}"
+          disabled: false
+        ttl: 60
+        type: "{{ item.record_type }}"
+  with_items:
+    - "{{ pdns_create_record }}"
+  delegate_to: "{{ vault_api_executor }}"
