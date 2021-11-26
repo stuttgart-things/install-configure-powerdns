@@ -9,12 +9,12 @@
     body_format: json
     headers:
       X-API-Key: "{{ pdns_token }}"
-  register: pdns_server_info
+  register: pdns_api_server_answer
   delegate_to: "{{ pdns_api_executor }}"
 
 - name: Filter server id from api answer
   ansible.builtin.set_fact:
-    pdns_server_id: "{{ pdns_api_executor.json.id }}"
+    pdns_server_id: "{{ pdns_api_server_answer.json.id }}"
 
 - name: Get zone id
   ansible.builtin.uri:
