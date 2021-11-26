@@ -21,7 +21,7 @@
 - name: Get zone id
   ansible.builtin.uri:
     validate_certs: false
-    url: "{{ pdns_url }}/api/v1/servers/{{ pdns_server_id[0] }}/zones"
+    url: "{{ pdns_url }}/api/v1/servers/{{ pdns_server_id }}/zones"
     method: GET
     status_code: 200
     headers:
@@ -38,7 +38,7 @@
 - name: Create dns record (RRSet)
   ansible.builtin.uri:
     validate_certs: false
-    url: "{{ pdns_url }}/api/v1/servers/{{ pdns_server_id[0] }}/zones/{{ pdns_zone_id[0] }}"
+    url: "{{ pdns_url }}/api/v1/servers/{{ pdns_server_id }}/zones/{{ pdns_zone_id[0] }}"
     method: PATCH
     status_code: 204
     body_format: json
