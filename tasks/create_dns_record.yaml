@@ -14,7 +14,9 @@
 
 - name: Filter server id from api answer
   ansible.builtin.set_fact:
-    pdns_server_id: "{{ pdns_api_server_answer.json.id }}"
+    pdns_server_id: "{{ pdns_api_server_answer.json | json_query(jmesquery) }}"
+  vars:
+    jmesquery: "@.id"
 
 - name: Get zone id
   ansible.builtin.uri:
