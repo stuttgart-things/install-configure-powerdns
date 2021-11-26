@@ -8,7 +8,7 @@ ports:
   #   host: 53
   #   container: 53
   #   protocol: tcp
-  pdns_tcp:
+  pdns_api:
     host: 8081
     container: 8081
     protocol: tcp

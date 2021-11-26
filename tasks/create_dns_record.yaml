@@ -18,6 +18,8 @@
           disabled: false
         ttl: 60
         type: "{{ item.record_type }}"
+    headers:
+      X-API-Key: "{{ pdns_pwd }}"
   with_items:
     - "{{ pdns_create_record }}"
   delegate_to: "{{ vault_api_executor }}"
