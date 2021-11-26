@@ -9,8 +9,8 @@
     body_format: json
     headers:
       X-API-Key: "{{ pdns_token }}"
-  register: pdns_api_server_answer
   delegate_to: "{{ pdns_api_executor }}"
+  register: pdns_api_server_answer
 
 - name: Filter server id from api answer
   ansible.builtin.set_fact:
