@@ -55,15 +55,3 @@
     headers:
       X-API-Key: "{{ pdns_token }}"
   delegate_to: "{{ pdns_api_executor }}"
-
-id: sthings.tiab.ssc.sva.de.
-name: sthings.tiab.ssc.sva.de.
-rrsets:
-- comments: []
-  changetype: replace
-  name: gudde.sthings.tiab.ssc.sva.de.
-  records:
-  - content: 192.168.1.1
-    disabled: false
-  ttl: 60
-  type: A
