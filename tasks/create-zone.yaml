@@ -11,6 +11,6 @@
       zone:
         name:
     headers:
-      X-API-Key: "{{ pdns_pwd }}"
+      X-API-Key: "{{ pdns_token }}"
   register: pdns_zone_created_info
   delegate_to: "{{ pdns_api_executor }}"

@@ -8,7 +8,7 @@
     status_code: 200
     body_format: json
     headers:
-      X-API-Key: "{{ pdns_pwd }}"
+      X-API-Key: "{{ pdns_token }}"
   register: pdns_server_info
   delegate_to: "{{ pdns_api_executor }}"
 
@@ -23,7 +23,7 @@
     method: GET
     status_code: 200
     headers:
-      X-API-Key: "{{ pdns_pwd }}"
+      X-API-Key: "{{ pdns_token }}"
   delegate_to: "{{ vault_api_executor }}"
   register: pdns_api_zone_answer
 
@@ -53,5 +53,5 @@
         ttl: 60
         type: "{{ item.record_type }}"
     headers:
-      X-API-Key: "{{ pdns_pwd }}"
+      X-API-Key: "{{ pdns_token }}"
   delegate_to: "{{ vault_api_executor }}"
