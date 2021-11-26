@@ -41,11 +41,11 @@
     status_code: 204
     body_format: json
     body:
-      id: "{{ pdns_zone_id }}"
+      id: "{{ pdns_zone_id[0] }}"
       name: "{{ item.zone }}"
       rrsets:
         comments: Created with ansible
-        changetype: replace
+        changetype: "{% if item.state == 'present' %}REPLACE{% elif item.state == 'absent' %}DELETE{% endif %}"
         name: "{{ item.fqdn }}"
         records:
           content: "{{ item.ip }}"
