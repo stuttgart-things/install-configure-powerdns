@@ -26,7 +26,7 @@
     status_code: 200
     headers:
       X-API-Key: "{{ pdns_token }}"
-  delegate_to: "{{ vault_api_executor }}"
+  delegate_to: "{{ pdns_api_executor }}"
   register: pdns_api_zone_answer
 
 - name: Filter zone id from api answer
@@ -56,4 +56,4 @@
         type: "{{ item.record_type }}"
     headers:
       X-API-Key: "{{ pdns_token }}"
-  delegate_to: "{{ vault_api_executor }}"
+  delegate_to: "{{ pdns_api_executor }}"
