@@ -3,7 +3,7 @@
   ansible.builtin.uri:
     return_content: yes
     validate_certs: false
-    url: "{{ vault_url }}/api/v1/servers/{{ pdns_server_id }}/zones"
+    url: "{{ vault_url }}/api/v1/servers/{{ pdns_server_id[0] }}/zones"
     method: PUT
     status_code: 201
     body_format: json

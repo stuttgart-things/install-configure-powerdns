@@ -1,14 +1,48 @@
 ---
+- name: Get server id
+  ansible.builtin.uri:
+    return_content: yes
+    validate_certs: false
+    url: "{{ pdns_url }}/api/v1/servers"
+    method: GET
+    status_code: 200
+    body_format: json
+    headers:
+      X-API-Key: "{{ pdns_pwd }}"
+  register: pdns_server_info
+  delegate_to: "{{ pdns_api_executor }}"
+
+- name: Filter server id from api answer
+  ansible.builtin.set_fact:
+    pdns_server_id: "{{ pdns_api_executor.json.id }}"
+
+- name: Get zone id
+  ansible.builtin.uri:
+    validate_certs: false
+    url: "{{ pdns_url }}/api/v1/servers/{{ pdns_server_id[0] }}/zones"
+    method: GET
+    status_code: 200
+    headers:
+      X-API-Key: "{{ pdns_pwd }}"
+  delegate_to: "{{ vault_api_executor }}"
+  register: pdns_api_zone_answer
+
+- name: Filter zone id from api answer
+  ansible.builtin.set_fact:
+    pdns_zone_id: "{{ pdns_api_zone_answer.json | json_query(jmesquery) }}"
+  vars:
+    jmesquery: "[?name=='{{ item.zone }}'].id"
+
 - name: Create dns record (RRSet)
   ansible.builtin.uri:
     validate_certs: false
-    url: "{{ pdns_url }}/api/v1/servers/{{ pdns_server_id }}/zones/{{ pdns_zone_id }}"
+    url: "{{ pdns_url }}/api/v1/servers/{{ pdns_server_id[0] }}/zones/{{ pdns_zone_id[0] }}"
     method: PATCH
     status_code: 204
     body_format: json
     body:
       id: "{{ pdns_zone_id }}"
-      name: "{{ pdns_zone_name }}"
+      name: "{{ item.zone }}"
       rrsets:
         comments: Created with ansible
         changetype: replace
@@ -20,6 +54,4 @@
         type: "{{ item.record_type }}"
     headers:
       X-API-Key: "{{ pdns_pwd }}"
-  with_items:
-    - "{{ pdns_create_record }}"
   delegate_to: "{{ vault_api_executor }}"
