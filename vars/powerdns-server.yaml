@@ -5,8 +5,8 @@ ports:
     container: 53
     protocol: udp
   pdns_api:
-    host: 8080
-    container: 8081
+    host: 8443
+    container: 8443
     protocol: tcp
   frontend_https:
     host: 443
