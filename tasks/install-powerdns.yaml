@@ -3,6 +3,11 @@
   include_vars:
     file: vars/powerdns-server.yaml
 
+- name: Creates directory
+  ansible.builtin.file:
+    path: {{ powerdns_conf_host_cert_path }}powerdns_conf_host_cert_path
+    state: directory
+
 - name: Request certificates from vault server for harbor service
   ansible.builtin.include_role:
     name: install-configure-vault 
@@ -12,9 +17,9 @@
     vault_gen_cert_fqdn: "{{ ansible_fqdn }}"
     vault_gen_cert_ip_sans: "{{ ansible_default_ipv4.address }}" 
     vault_gen_cert_install: true # true for installing cert directly to the path 
-    vault_gen_cert_install_pub_path: "/podman/pv/powerdns/certificate/cert.crt"
-    vault_gen_cert_install_priv_path: "/podman/pv/powerdns/certificate/cert.key"
-    vault_gen_cert_install_ca_path: "/podman/pv/powerdns/certificate/ca.crt"
+    vault_gen_cert_install_pub_path: "{{ powerdns_conf_host_cert_path }}/cert.crt"
+    vault_gen_cert_install_priv_path: "{{ powerdns_conf_host_cert_path }}/cert.key"
+    vault_gen_cert_install_ca_path: "{{ powerdns_conf_host_cert_path }}/ca.crt"
   when: vault_cert | bool
 
 - name: Start podman deployment as root

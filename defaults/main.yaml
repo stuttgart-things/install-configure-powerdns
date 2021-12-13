@@ -7,6 +7,7 @@ powerdns_mariadb_db: pdns
 powerdns_frontend_secret_key: "a-very-secret-key"
 
 #POWERDNS configuration
+powerdns_conf_host_cert_path: /podman/pv/powerdns/certificate
 powerdns_conf_master: yes
 powerdns_conf_api: yes
 powerdns_conf_api_key: "password123"
