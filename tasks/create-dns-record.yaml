@@ -45,7 +45,8 @@
       name: "{{ item.zone }}"
       rrsets:
       - comments:
-        - content: "{{ item.note }}"
+        - account: ''
+          content: "{{ item.note }}"
         changetype: "{% if item.state == 'present' %}REPLACE{% elif item.state == 'absent' %}DELETE{% endif %}"
         name: "{{ item.fqdn }}"
         records:
