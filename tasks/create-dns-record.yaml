@@ -41,17 +41,15 @@
     status_code: 204
     body_format: json
     body:
-      id: "{{ pdns_zone_id[0] }}"
-      name: "{{ item.zone }}"
-      rrsets:
       - comments:
-        - content: "{{ item.note }}"
+        - account: ''
+          content: "{{ item.note }}"
         changetype: "{% if item.state == 'present' %}REPLACE{% elif item.state == 'absent' %}DELETE{% endif %}"
         name: "{{ item.fqdn }}"
         records:
         - content: "{{ item.content }}"
           disabled: false
-        ttl: 60
+        ttl: "{{ item.ttl | default('60')}}"
         type: "{{ item.record_type }}"
     headers:
       X-API-Key: "{{ pdns_token }}"
