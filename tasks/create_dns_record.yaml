@@ -44,7 +44,8 @@
       id: "{{ pdns_zone_id[0] }}"
       name: "{{ item.zone }}"
       rrsets:
-      - comments: []
+      - comments:
+        - content: "{{ item.note }}"
         changetype: "{% if item.state == 'present' %}REPLACE{% elif item.state == 'absent' %}DELETE{% endif %}"
         name: "{{ item.fqdn }}"
         records:
