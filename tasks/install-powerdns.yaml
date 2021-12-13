@@ -3,9 +3,9 @@
   include_vars:
     file: vars/powerdns-server.yaml
 
-- name: Creates directory
+- name: Create certificate path on host
   ansible.builtin.file:
-    path: {{ powerdns_conf_host_cert_path }}powerdns_conf_host_cert_path
+    path: "{{ powerdns_conf_host_cert_path }}"
     state: directory
 
 - name: Request certificates from vault server for harbor service
