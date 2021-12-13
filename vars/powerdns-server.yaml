@@ -4,17 +4,13 @@ ports:
     host: 53
     container: 53
     protocol: udp
-  # pdns_tcp:
-  #   host: 53
-  #   container: 53
-  #   protocol: tcp
   pdns_api:
-    host: 8081
+    host: 8080
     container: 8081
     protocol: tcp
   frontend_https:
-    host: 80
-    container: 80
+    host: 443
+    container: 443
     protocol: tcp
 
 pod_name: pdns
@@ -29,6 +25,12 @@ containers:
       - MYSQL_PASSWORD={{ powerdns_mariadb_pw }}
     volumes:
       - "/podman/pv/powerdns/mariadb/:/var/lib/mysql:z"
+
+  powerdns-nginx:
+    image: nginx:alpine
+    volumes:
+      - "/podman/pv/powerdns/nginx/:/etc/nginx:z"
+      - "/podman/pv/powerdns/certificate/:/etc/certificate:z"
 
   powerdns-backend:
     image: pschiffe/pdns-mysql:4.4-alpine
@@ -55,3 +57,7 @@ containers:
       - SECRET_KEY='{{ powerdns_frontend_secret_key }}'
     volumes:
       - "/podman/pv/powerdns/frontend/:/data:z"
+
+generate_config: true
+config_template: templates/nginx.conf.j2
+config_mount_target: /podman/pv/powerdns/nginx/nginx.conf
