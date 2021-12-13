@@ -22,3 +22,4 @@ powerdns_conf_default_ttl: 1500
 
 # General vars
 powerdns_install: false
+vault_cert: false
