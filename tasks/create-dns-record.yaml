@@ -49,7 +49,7 @@
         changetype: "{% if item.state == 'present' %}REPLACE{% elif item.state == 'absent' %}DELETE{% endif %}"
         name: "{{ item.fqdn }}"
         records:
-        - content: "{{ item.ip }}"
+        - content: "{{ item.content }}"
           disabled: false
         ttl: 60
         type: "{{ item.record_type }}"
