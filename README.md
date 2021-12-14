@@ -159,7 +159,8 @@ example.com
 
 ### Features:
 - Install PowerDNS with frontend and backend with NGINX reverse proxy
-- Create DNS records
+- Create/delete DNS records
+- Create/delete DNS zones
 
 ## Version:
 ```
