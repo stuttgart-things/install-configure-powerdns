@@ -7,8 +7,6 @@ events {
 
 http {
     server {
-        listen         80;
-        return 301 https://$host$request_uri;
 
         location / {
             proxy_set_header X-Real-IP $remote_addr;
@@ -32,8 +30,6 @@ http {
     }
 
     server {
-        listen         80;
-        return 301 https://$host$request_uri;
 
         location / {
             proxy_set_header X-Real-IP $remote_addr;
