@@ -1,7 +1,7 @@
 # stuttgart-things/install-configure-powerdns
 
 This Ansible role can completely set up and configure a PowerDNS DNS server with a mariadb backend and a managment frontend within a podman container with a NGINX reverse proxy for secure access. The entire ansible logic is based on api calls. No client binary is required.
-In addition to the installation, this role can also be used to create dns entrys and much more.
+In addition to the installation, this role can also be used to create and delete dns entrys manage dns zones and much more.
 
 ### Role installation:
 <details><summary><b>Install this role on your ansible host (click here)</b></summary>
