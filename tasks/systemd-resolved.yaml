@@ -23,5 +23,5 @@
 
 - name: Start service systemd-resolved
   ansible.builtin.systemd:
-    state: systemd-resolved
-    name: httpd
+    state: started
+    name: systemd-resolved
