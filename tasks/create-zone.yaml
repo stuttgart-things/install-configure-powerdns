@@ -20,7 +20,7 @@
   ansible.builtin.uri:
     return_content: yes
     validate_certs: false
-    url: "{{ pdns_url }}/api/v1/servers/{{ pdns_server_id[0] }}/zones"
+    url: "{{ pdns_url }}/api/v1/servers/{{ pdns_server_id }}/zones"
     method: POST
     status_code: 201
     body_format: json
@@ -36,7 +36,7 @@
   ansible.builtin.uri:
     return_content: yes
     validate_certs: false
-    url: "{{ pdns_url }}/api/v1/servers/{{ pdns_server_id[0] }}/zones/{{ item.name }}"
+    url: "{{ pdns_url }}/api/v1/servers/{{ pdns_server_id }}/zones/{{ item.name }}"
     method: DELETE
     status_code: 204
     headers:
