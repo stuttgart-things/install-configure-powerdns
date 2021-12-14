@@ -14,7 +14,7 @@
 
 - name: Filter server id from api answer
   ansible.builtin.set_fact:
-    pdns_server_id: "{{ pdns_api_server_answer.json[0].id }}"
+    pdns_server_id: "{{ pdns_api_server_answer.json.id }}"
 
 - name: Create DNS zone
   ansible.builtin.uri:
