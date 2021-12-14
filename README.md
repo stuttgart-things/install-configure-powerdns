@@ -131,7 +131,8 @@ example.com
 ## Version:
 ```
 DATE            WHO            WHAT
-2021-12-08      Marcel Zapf    Add feature to disable DNSStubListener systemd-resolved
+2021-12-14      Marcel Zapf    Add logic to create pdns zones
+2021-12-14      Marcel Zapf    Add feature to disable DNSStubListener systemd-resolved
 2021-12-13      Marcel Zapf    Initial commit
 ```
 
