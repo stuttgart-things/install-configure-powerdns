@@ -1,0 +1,27 @@
+---
+- name: Stop service systemd-resolved
+  ansible.builtin.systemd:
+    name: systemd-resolved
+    state: stopped
+
+- name: Disable DNSStubListener in resolved config
+  ansible.builtin.lineinfile:
+    path: /etc/systemd/resolved.conf
+    regexp: '^DNSStubListener='
+    line: DNSStubListener=no
+
+- name: Remove resolv.conf
+  ansible.builtin.file:
+    path: /etc/resolv.conf
+    state: absent
+
+- name: Create symbolic link resolv.conf
+  file:
+    src: /run/systemd/resolve/resolv.conf
+    dest: /etc/resolv.conf
+    state: link
+
+- name: Start service systemd-resolved
+  ansible.builtin.systemd:
+    state: systemd-resolved
+    name: httpd
