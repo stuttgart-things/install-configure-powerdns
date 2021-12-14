@@ -150,6 +150,7 @@ ansible-playbook -i inventory.ini playbook.yml
 example.com
 ```
 </details>
+
 ## Requirements and Dependencies:
 - Ubuntu 20.04
 - Fedora 34
