@@ -9,7 +9,7 @@
 
 - name: Create or remove DNS zone object
   ansible.builtin.include_tasks: create-zone.yaml
-  when: pdns_create_record is defined
+  when: pdns_create_zone is defined
   with_items:
   - "{{ pdns_create_zone }}"
 
