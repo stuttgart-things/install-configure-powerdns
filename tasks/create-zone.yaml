@@ -1,16 +1,62 @@
 ---
+- name: Get server id
+  ansible.builtin.uri:
+    return_content: yes
+    validate_certs: false
+    url: "{{ pdns_url }}/api/v1/servers"
+    method: GET
+    status_code: 200
+    body_format: json
+    headers:
+      X-API-Key: "{{ pdns_token }}"
+  delegate_to: "{{ pdns_api_executor }}"
+  register: pdns_api_server_answer
+
+- name: Filter server id from api answer
+  ansible.builtin.set_fact:
+    pdns_server_id: "{{ pdns_api_server_answer.json[0].id }}"
+
+- name: Get zone id
+  ansible.builtin.uri:
+    validate_certs: false
+    url: "{{ pdns_url }}/api/v1/servers/{{ pdns_server_id }}/zones"
+    method: GET
+    status_code: 200
+    headers:
+      X-API-Key: "{{ pdns_token }}"
+  delegate_to: "{{ pdns_api_executor }}"
+  register: pdns_api_zone_answer
+
+- name: Filter zone id from api answer
+  ansible.builtin.set_fact:
+    pdns_zone_id: "{{ pdns_api_zone_answer.json | json_query(jmesquery) }}"
+  vars:
+    jmesquery: "[?name=='{{ item.zone }}'].id"
+
 - name: "Create DNS zone"
   ansible.builtin.uri:
     return_content: yes
     validate_certs: false
     url: "{{ vault_url }}/api/v1/servers/{{ pdns_server_id[0] }}/zones"
-    method: PUT
+    method: POST
     status_code: 201
     body_format: json
     body:
-      zone:
-        name:
+      name: "{{ item.name }}"
+      kind: "{{ item.kind }}"
     headers:
       X-API-Key: "{{ pdns_token }}"
-  register: pdns_zone_created_info
+  when: item.state == 'present'
+  delegate_to: "{{ pdns_api_executor }}"
+
+- name: "Create DNS zone"
+  ansible.builtin.uri:
+    return_content: yes
+    validate_certs: false
+    url: "{{ vault_url }}/api/v1/servers/{{ pdns_server_id[0] }}/zones/{{ item.name }}"
+    method: DELETE
+    status_code: 204
+    headers:
+      X-API-Key: "{{ pdns_token }}"
+  when: item.state == 'absent'
   delegate_to: "{{ pdns_api_executor }}"

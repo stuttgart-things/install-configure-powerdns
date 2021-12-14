@@ -7,6 +7,12 @@
   ansible.builtin.include_tasks: install-powerdns.yaml
   when: powerdns_install | bool
 
+- name: Create or remove DNS zone object
+  ansible.builtin.include_tasks: create-zone.yaml
+  when: pdns_create_record is defined
+  with_items:
+  - "{{ pdns_create_zone }}"
+
 - name: Create or remove DNS (RRSet) record
   ansible.builtin.include_tasks: create-dns-record.yaml
   when: pdns_create_record is defined
