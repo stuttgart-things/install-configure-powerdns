@@ -1,4 +1,8 @@
 ---
+- name: Disable systemd-resolved DNSStubListener on Ubuntu
+  ansible.builtin.include_tasks: systemd-resolved.yaml
+  when: powerdns_install | bool and ansible_distribution == 'Ubuntu'
+
 - name: Install PowerDNS /w pod profile
   ansible.builtin.include_tasks: install-powerdns.yaml
   when: powerdns_install | bool
