@@ -16,7 +16,7 @@
     state: absent
 
 - name: Create symbolic link resolv.conf
-  file:
+  ansible.builtin.file:
     src: /run/systemd/resolve/resolv.conf
     dest: /etc/resolv.conf
     state: link
