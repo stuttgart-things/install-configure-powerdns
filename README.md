@@ -93,20 +93,20 @@ ansible-playbook -i inventory.ini playbook.yml
 
     entry_zone: "sthings.tiab.ssc.sva.de."
     pdns_create_record:
-    - fqdn: "*.atalanta.sthings.tiab.ssc.sva.de."
-        content: 10.100.136.242
-        record_type: A
-        zone: "{{ entry_zone }}"
-        state: present
-        ttl: 60
-        note: Created with ansible
-    - fqdn: "vault.sthings.tiab.ssc.sva.de."
-        content: "vault-ssc.labul.sva.de."
-        record_type: CNAME
-        zone: "{{ entry_zone }}"
-        state: present
-        ttl: 60
-        note: Created with ansible
+          - fqdn: "*.atalanta.sthings.tiab.ssc.sva.de."
+            content: 10.100.136.242
+            record_type: A
+            zone: "{{ entry_zone }}"
+            state: present
+            ttl: 60
+            note: Created with ansible
+          - fqdn: "vault.sthings.tiab.ssc.sva.de."
+            content: "vault-ssc.labul.sva.de."
+            record_type: CNAME
+            zone: "{{ entry_zone }}"
+            state: present
+            ttl: 60
+            note: Created with ansible
   roles:
     - install-configure-powerdns
 ```
