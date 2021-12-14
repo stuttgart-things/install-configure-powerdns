@@ -73,7 +73,7 @@ example.com
 ```
 </details>
 
-<details><summary>Create DNS entrys based on ansible vars profile (click here)</summary>
+<details><summary>Create or delete DNS entrys based on ansible vars profile (click here)</summary>
 
 ### Ansible command:
 ```
@@ -118,6 +118,38 @@ example.com
 ```
 </details>
 
+<details><summary>Create or delete DNS zone based on ansible vars profile (click here)</summary>
+
+### Ansible command:
+```
+ansible-playbook -i inventory.ini playbook.yml
+```
+
+### Playbook: playbook.yml
+```
+---
+- hosts: "powerdns-server"
+
+  vars:
+
+    pdns_api_executor: localhost
+    pdns_url: "https://ns-sthings.tiab.labda.sva.de:8443"
+    pdns_token: "password123"
+
+    pdns_create_zone:
+      - name: "sthings.tiab.ssc.sva.de."
+        state: present
+        kind: NATIVE
+  roles:
+    - install-configure-powerdns
+```
+
+### Playbook: inventory.ini
+```
+[powerdns-server]
+example.com
+```
+</details>
 ## Requirements and Dependencies:
 - Ubuntu 20.04
 - Fedora 34
