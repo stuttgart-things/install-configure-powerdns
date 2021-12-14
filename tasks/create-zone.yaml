@@ -16,7 +16,7 @@
   ansible.builtin.set_fact:
     pdns_server_id: "{{ pdns_api_server_answer.json[0].id }}"
 
-- name: "Create DNS zone"
+- name: Create DNS zone
   ansible.builtin.uri:
     return_content: yes
     validate_certs: false
@@ -32,7 +32,7 @@
   when: item.state == 'present'
   delegate_to: "{{ pdns_api_executor }}"
 
-- name: "Create DNS zone"
+- name: Delete DNS zone
   ansible.builtin.uri:
     return_content: yes
     validate_certs: false
