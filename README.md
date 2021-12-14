@@ -1,6 +1,6 @@
 # stuttgart-things/install-configure-powerdns
 
-This Ansible role can completely set up and configure a PowerDNS DNS server with a mariadb backend and a managment frontend with a NGINX reverse proxy for secure access. The entire ansible logic is based on api calls. No client binary is required.
+This Ansible role can completely set up and configure a PowerDNS DNS server with a mariadb backend and a managment frontend within a podman container with a NGINX reverse proxy for secure access. The entire ansible logic is based on api calls. No client binary is required.
 In addition to the installation, this role can also be used to create dns entrys and much more.
 
 ### Role installation:
@@ -36,6 +36,87 @@ ansible-galaxy install -r /tmp/requirements.yaml --force && ansible-galaxy colle
 </details>
 
 For more information about stuttgart-things role installation visit: [Stuttgart-Things howto install role](https://codehub.sva.de/Lab/stuttgart-things/meta/documentation/doc-as-code/-/blob/master/howtos/howto-install-role.md)
+
+## Example playbooks to use this role
+
+<details><summary>Install and initializing a powerdns server within a podman container and get cert from vault (click here)</summary>
+
+### Ansible command:
+```
+ansible-playbook -i inventory.ini playbook.yml
+```
+
+### Playbook: playbook.yml
+```
+---
+- hosts: "powerdns-server"
+  become: true
+
+  vars:
+
+    powerdns_install: true
+
+    vault_ca_cert_role_name: labul.sva.de
+    vault_url: "https://vault.labul.sva.de:8200"
+    vault_token: "example-token-12345"
+
+    vault_cert: true
+  
+  roles:
+    - install-configure-powerdns
+```
+
+### Playbook: inventory.ini
+```
+[powerdns-server]
+example.com
+```
+</details>
+
+<details><summary>Create DNS entrys based on ansible vars profile (click here)</summary>
+
+### Ansible command:
+```
+ansible-playbook -i inventory.ini playbook.yml
+```
+
+### Playbook: playbook.yml
+```
+---
+- hosts: "powerdns-server"
+
+  vars:
+
+    pdns_api_executor: localhost
+    pdns_url: "https://ns-sthings.tiab.labda.sva.de:8443"
+    pdns_token: "password123"
+
+    entry_zone: "sthings.tiab.ssc.sva.de."
+    pdns_create_record:
+    - fqdn: "*.atalanta.sthings.tiab.ssc.sva.de."
+        content: 10.100.136.242
+        record_type: A
+        zone: "{{ entry_zone }}"
+        state: present
+        ttl: 60
+        note: Created with ansible
+    - fqdn: "vault.sthings.tiab.ssc.sva.de."
+        content: "vault-ssc.labul.sva.de."
+        record_type: CNAME
+        zone: "{{ entry_zone }}"
+        state: present
+        ttl: 60
+        note: Created with ansible
+  roles:
+    - install-configure-powerdns
+```
+
+### Playbook: inventory.ini
+```
+[powerdns-server]
+example.com
+```
+</details>
 
 ## Requirements and Dependencies:
 - Ubuntu 20.04
