@@ -17,7 +17,7 @@ pod_name: pdns
 
 containers:
   powerdns-mariadb:
-    image: mariadb:10.9
+    image: docker.io/mariadb:10.9
     environment:
       - MYSQL_ROOT_PASSWORD={{ powerdns_mariadb_rootpw }}
       - MYSQL_DATABASE={{ powerdns_mariadb_db }}
@@ -27,13 +27,13 @@ containers:
       - "/podman/pv/powerdns/mariadb/:/var/lib/mysql:z"
 
   powerdns-nginx:
-    image: nginx:alpine
+    image: docker.io/nginx:alpine
     volumes:
       - "/podman/pv/powerdns/nginx/:/etc/nginx:z"
       - "{{ powerdns_conf_host_cert_path }}/:/etc/certificate:z"
 
   powerdns-backend:
-    image: pschiffe/pdns-mysql:4.6-alpine
+    image: docker.io/pschiffe/pdns-mysql:4.6-alpine
     environment:
       - PDNS_local_address={{ powerdns_conf_local_address }}
       - PDNS_gmysql_host={{ powerdns_conf_gmysql_host }}
@@ -52,7 +52,7 @@ containers:
       - PDNS_default_ttl={{ powerdns_conf_default_ttl }}
 
   powerdns-frontend:
-    image: ngoduykhanh/powerdns-admin:latest
+    image: docker.io/ngoduykhanh/powerdns-admin:latest
     environment:
       - SECRET_KEY='{{ powerdns_frontend_secret_key }}'
     volumes:
