@@ -33,7 +33,7 @@ containers:
       - "{{ powerdns_conf_host_cert_path }}/:/etc/certificate:z"
 
   powerdns-backend:
-    image: docker.io/pschiffe/pdns-mysql:4.6-alpine
+    image: docker.io/pschiffe/pdns-mysql:4.5-alpine
     environment:
       - PDNS_local_address={{ powerdns_conf_local_address }}
       - PDNS_gmysql_host={{ powerdns_conf_gmysql_host }}
