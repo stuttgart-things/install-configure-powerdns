@@ -17,7 +17,7 @@ pod_name: pdns
 
 containers:
   powerdns-mariadb:
-    image: mariadb:10.5
+    image: mariadb:10.9
     environment:
       - MYSQL_ROOT_PASSWORD={{ powerdns_mariadb_rootpw }}
       - MYSQL_DATABASE={{ powerdns_mariadb_db }}
@@ -33,7 +33,7 @@ containers:
       - "{{ powerdns_conf_host_cert_path }}/:/etc/certificate:z"
 
   powerdns-backend:
-    image: pschiffe/pdns-mysql:4.4-alpine
+    image: pschiffe/pdns-mysql:4.6-alpine
     environment:
       - PDNS_local_address={{ powerdns_conf_local_address }}
       - PDNS_gmysql_host={{ powerdns_conf_gmysql_host }}
