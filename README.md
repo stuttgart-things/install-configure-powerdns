@@ -15,7 +15,7 @@ roles:
   scm: git
 - src: git@codehub.sva.de:Lab/stuttgart-things/supporting-roles/install-requirements.git
   scm: git
-- src: git@codehub.sva.de:Lab/stuttgart-things/supporting-roles/deploy-podman-container.git
+- src: git@codehub.sva.de:Lab/stuttgart-things/supporting-roles/deploy-podman-pod.git
   scm: git
 - src: git@codehub.sva.de:Lab/stuttgart-things/supporting-roles/install-configure-podman.git
   scm: git
