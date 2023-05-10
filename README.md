@@ -9,15 +9,15 @@ In addition to the installation, this role can also be used to create and delete
 ```
 cat <<EOF > /tmp/requirements.yaml
 roles:
-- src: git@codehub.sva.de:Lab/stuttgart-things/supporting-roles/install-configure-powerdns.git
+- src: https://github.com/stuttgart-things/install-configure-powerdns.git
   scm: git
-- src: git@codehub.sva.de:Lab/stuttgart-things/supporting-roles/install-configure-vault.git
+- src: https://github.com/stuttgart-things/install-configure-vault.git
   scm: git
-- src: git@codehub.sva.de:Lab/stuttgart-things/supporting-roles/install-requirements.git
+- src: https://github.com/stuttgart-things/install-requirements.git
   scm: git
-- src: git@codehub.sva.de:Lab/stuttgart-things/supporting-roles/deploy-podman-pod.git
+- src: https://github.com/stuttgart-things/deploy-podman-pod.git
   scm: git
-- src: git@codehub.sva.de:Lab/stuttgart-things/supporting-roles/install-configure-podman.git
+- src: https://github.com/stuttgart-things/install-configure-podman.git
   scm: git
 
 collections:
@@ -34,8 +34,6 @@ EOF
 ansible-galaxy install -r /tmp/requirements.yaml --force && ansible-galaxy collection install -r /tmp/requirements.yaml -f
 ```
 </details>
-
-For more information about stuttgart-things role installation visit: [Stuttgart-Things howto install role](https://codehub.sva.de/Lab/stuttgart-things/meta/documentation/doc-as-code/-/blob/master/howtos/howto-install-role.md)
 
 ## Example playbooks to use this role
 
@@ -56,8 +54,8 @@ ansible-playbook -i inventory.ini playbook.yml
 
     powerdns_install: true
 
-    vault_ca_cert_role_name: labul.sva.de
-    vault_url: "https://vault.labul.sva.de:8200"
+    vault_ca_cert_role_name: labul.sthings.de
+    vault_url: "https://vault.labul.sthings.de:8200"
     vault_token: "example-token-12345"
 
     vault_cert: true
@@ -88,20 +86,20 @@ ansible-playbook -i inventory.ini playbook.yml
   vars:
 
     pdns_api_executor: localhost
-    pdns_url: "https://ns-sthings.tiab.labda.sva.de:8443"
+    pdns_url: "https://ns.sthings.de:8443"
     pdns_token: "password123"
 
-    entry_zone: "sthings.tiab.ssc.sva.de."
+    entry_zone: "sthings.sthings.de."
     pdns_create_record:
-          - fqdn: "*.atalanta.sthings.tiab.ssc.sva.de."
+          - fqdn: "*.atalanta.sthings.sthings.de."
             content: 10.100.136.242
             record_type: A
             zone: "{{ entry_zone }}"
             state: present
             ttl: 60
             note: Created with ansible
-          - fqdn: "vault.sthings.tiab.ssc.sva.de."
-            content: "vault-ssc.labul.sva.de."
+          - fqdn: "vault.sthings.sthings.de."
+            content: "vault-labul.sthings.de."
             record_type: CNAME
             zone: "{{ entry_zone }}"
             state: present
@@ -133,11 +131,11 @@ ansible-playbook -i inventory.ini playbook.yml
   vars:
 
     pdns_api_executor: localhost
-    pdns_url: "https://ns-sthings.tiab.labda.sva.de:8443"
+    pdns_url: "https://ns.sthings.de:8443"
     pdns_token: "password123"
 
     pdns_create_zone:
-      - name: "sthings.tiab.ssc.sva.de."
+      - name: "sthings.sthings.de."
         state: present
         kind: NATIVE
   roles:
@@ -178,4 +176,4 @@ BSD
 Author Information
 ------------------
 
-Marcel Zapf; 11/2021; SVA GmbH
+Marcel Zapf; 11/2021; Stuttgart-Things
