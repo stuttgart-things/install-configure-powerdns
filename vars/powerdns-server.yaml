@@ -1,5 +1,5 @@
 ---
-ports: 
+ports:
   pdns_udp:
     host: 53
     container: 53
